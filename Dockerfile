@@ -11,4 +11,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["gunicorn", "med_platform_complete_fixed_proba4.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD gunicorn med_platform_complete_fixed_proba4.wsgi:application --bind 0.0.0.0:$PORT
