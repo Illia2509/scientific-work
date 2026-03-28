@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Профіль{% endblock %}
+{% block content %}
+<div class="grid two">
+    <section class="card">
+        <h2>Профіль</h2>
+        <form method="post" class="form-grid">
+            {% csrf_token %}
+            {% for field in form %}
+                <div>
+                    <label>{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}<div class="error">{{ field.errors|join:', ' }}</div>{% endif %}
+                </div>
+            {% endfor %}
+            <button class="button" type="submit">Зберегти</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2>Лікарі</h2>
+        <div class="doctor-list">
+            {% for doctor in doctors %}
+                <div class="doctor-card">
+                    <div>
+                        <strong>{{ doctor.get_full_name|default:doctor.email }}</strong>
+                        <div class="muted">{{ doctor.email }}</div>
+                        {% if doctor.doctor_profile %}
+                            <div class="pill-row">
+                                <span class="pill">{{ doctor.doctor_profile.get_specialty_display }}</span>
+                                {% if doctor.doctor_profile.position %}<span class="pill secondary-pill">{{ doctor.doctor_profile.position }}</span>{% endif %}
+                                <span class="pill status-pill">{{ doctor.doctor_profile.get_status_display }}</span>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="actions">
+                        {% if doctor.id in active_grants %}
+                            <a class="button secondary" href="{% url 'revoke_access' doctor.id %}">Відкріпити</a>
+                        {% else %}
+                            <a class="button" href="{% url 'grant_access' doctor.id %}">Прикріпити</a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% empty %}
+                <p>Лікарів немає.</p>
+            {% endfor %}
+        </div>
+    </section>
+</div>
+{% endblock %}

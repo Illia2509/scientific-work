@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Кабінет лікаря{% endblock %}
+{% block content %}
+<section class="card">
+    <h2>Кабінет лікаря</h2>
+    {% if doctor_profile %}
+        <div class="muted">{{ doctor_profile.get_specialty_display }}{% if doctor_profile.position %} - {{ doctor_profile.position }}{% endif %}</div>
+    {% endif %}
+    <div class="doctor-list top-gap">
+        {% for grant in grants %}
+            <div class="doctor-card">
+                <div>
+                    <strong>{{ grant.patient.get_full_name|default:grant.patient.email }}</strong>
+                    <div class="muted">{{ grant.patient.email }}</div>
+                </div>
+                <div class="actions">
+                    <a class="button" href="{% url 'doctor_patient_book' grant.patient.id %}">Відкрити медичну книгу</a>
+                </div>
+            </div>
+        {% empty %}
+            <p>Поки що жоден пацієнт не прикріплений.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

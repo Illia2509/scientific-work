@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Med Platform{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="container nav-wrap">
+        <a class="brand" href="/">Med Platform</a>
+        <nav>
+            {% if request.user.is_authenticated %}
+                {% if request.user.role == 'patient' %}
+                    <a href="{% url 'profile' %}">Профіль</a>
+                    <a href="{% url 'medical_book' %}">Медична книга</a>
+                {% elif request.user.role == 'doctor' %}
+                    <a href="{% url 'doctor_dashboard' %}">Кабінет лікаря</a>
+                {% endif %}
+                {% if request.user.is_staff %}
+                    <a href="/admin/">Адмінка</a>
+                {% endif %}
+                <a href="{% url 'logout' %}">Вийти</a>
+            {% else %}
+                <a href="{% url 'login' %}">Увійти</a>
+                <a href="{% url 'register' %}">Реєстрація</a>
+            {% endif %}
+        </nav>
+    </div>
+</header>
+<main class="container">
+    {% block content %}{% endblock %}
+</main>
+</body>
+</html>

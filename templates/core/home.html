@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Головна{% endblock %}
+{% block content %}
+<div class="card narrow center">
+    <h1>Med Platform</h1>
+    {% if not request.user.is_authenticated %}
+        <div class="actions center-actions">
+            <a class="button" href="{% url 'login' %}">Увійти</a>
+            <a class="button secondary" href="{% url 'register' %}">Реєстрація</a>
+        </div>
+    {% else %}
+        <a class="button" href="{% url 'dashboard' %}">Відкрити кабінет</a>
+    {% endif %}
+</div>
+{% endblock %}

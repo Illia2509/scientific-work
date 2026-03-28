@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}Медична книга{% endblock %}
+{% block content %}
+<section class="card">
+    <h2>Медична книга - {{ owner.get_full_name|default:owner.email }}</h2>
+    <div class="records">
+        {% for record in records %}
+            <article class="record-card">
+                <div class="record-head">
+                    <strong>{{ record.title }}</strong>
+                    <span>{{ record.get_record_type_display }}</span>
+                </div>
+                <div class="muted">
+                    {{ record.visit_date }} | {{ record.author.get_full_name|default:record.author.email }}
+                    {% if record.author.doctor_profile %}- {{ record.author.doctor_profile.get_specialty_display }}{% endif %}
+                </div>
+                <p>{{ record.description }}</p>
+                {% if record.attachments.all %}
+                    <ul>
+                        {% for attachment in record.attachments.all %}
+                            <li><a href="{{ attachment.file.url }}">{{ attachment.file.name }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </article>
+        {% empty %}
+            <p>Записів поки немає.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}
