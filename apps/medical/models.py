@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 from apps.users.models import RoleChoices
+from django.core.exceptions import ValidationError
 
 class DoctorProfile(models.Model):
     class SpecialtyChoices(models.TextChoices):
