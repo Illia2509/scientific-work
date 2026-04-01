@@ -23,7 +23,3 @@ docker compose exec web python manage.py createsuperuser
 - створення лікарів і адміністрування через Django admin
 - спеціальність лікаря як поле з вибором, а не окремий каталог
 
-
-## Fixes in this build
-- Admin can create DoctorProfile for any user; the user is automatically converted to role=doctor.
-- Database port is not published to the host, so Docker Postgres will not conflict with local Postgres on 5432.
