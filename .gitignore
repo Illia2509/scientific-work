@@ -1,0 +1,28 @@
+# Секрети та локальне оточення
+.env
+*.env
+!.env.example
+
+# Локальні бази даних і резервні копії
+*.sqlite3
+db.sqlite3
+backups/
+
+# Файли, завантажені користувачами, і зібрана статика
+media/
+staticfiles/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE та ОС
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
