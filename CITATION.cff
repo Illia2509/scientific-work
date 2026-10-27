@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Якщо ви використовуєте цей репозиторій, будь ласка, посилайтеся на нього так:"
+title: "Розроблення веб-орієнтованої інформаційної системи електронної медичної карти з дослідженням моделей управління доступом до чутливих даних на основі RBAC та ABAC у розподіленому середовищі"
+authors:
+  - family-names: "Bredikhin"
+    given-names: "Illia"
+type: software
+license: MIT
+repository-code: "https://github.com/Illia2509/scientific-work"
+date-released: "2026-10-27"
